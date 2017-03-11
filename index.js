@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
-const token = process.env.PAGE_ACCESS_TOKEN
+const token = process.env.PAGE_ACCESS_TOKEN2
 
 app.set('port', (process.env.PORT || 5000))
 
