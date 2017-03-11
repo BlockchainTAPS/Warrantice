@@ -35,7 +35,7 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = event.message.text
-	if (text === 'Withdraw') {
+	if (text === ‘Generic’) {
                 sendGenericMessage(sender)
                 continue
             }
@@ -76,32 +76,26 @@ function sendGenericMessage(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "The Cabana UNIVILLAGE",
-                    "subtitle": "Rating 4.5/5",
-                    "image_url": "https://lh6.googleusercontent.com/-QimpAI3v_FQ/WLr9s8o5fwI/AAAAAAAADm8/LYD_u_K1JF0ltb07L9p_dyO-nD5ItyOmgCLIB/s408-k-no/",
+                    "title": "First card",
+                    "subtitle": "Element #1 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.google.com.my/maps/place/The+Cabana+UNIVILLAGE/@2.9447181,101.8720415,17z/data=!4m12!1m6!3m5!1s0x31cdce0fd89c5829:0xca94557719d2191!2sThe+University+of+Nottingham+(Malaysia+Campus)!8m2!3d2.9452538!4d101.874713!3m4!1s0x0:0x67374158d63118e7!8m2!3d2.9433275!4d101.8725434?hl=en",
-                        "title": "Location"
+                        "url": "https://www.messenger.com",
+                        "title": "web url"
                     }, {
-                        "type": "web_url",
-                        "title": "Withdraw RM50",
-                                "webview_height_ratio": "tall",
-                        "url": "http://www.maybank2u.com.my/mbb_info/m2u/public/personalDetail04.do?chCatId=/mbb/Personal/CRD-Cards&programId=CRD09-MerchantProgramme&cntTypeId=0&cntKey=CRD09.01",
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
                     }],
                 }, {
-                    "title": "Nott-A-Shop",
-                    "subtitle": "Rating 4.7/5",
-                    "image_url": "https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/14724604_971142202997963_5273153582612894607_n.png?oh=4338d15057dc4dbfc468e62932080ee5&oe=596ED532",
-                             "buttons": [{
-                                         "type": "web_url",
-                                         "url": "https://www.google.com.my/maps/place/Nott+A+Shop/@2.9441378,101.8736967,17z/data=!3m1!4b1!4m5!3m4!1s0x31cdce0fc65426fb:0x97f30181d2e8d430!8m2!3d2.9441378!4d101.8758854?hl=en",
-                                         "title": "Location"
-                                         },{
-                        "type": "web_url",
-                        "title": "Withdraw RM50",
-                                         "webview_height_ratio": "tall",
-                        "url": "http://www.maybank2u.com.my/mbb_info/m2u/public/personalDetail04.do?chCatId=/mbb/Personal/CRD-Cards&programId=CRD09-MerchantProgramme&cntTypeId=0&cntKey=CRD09.01",
+                    "title": "Second card",
+                    "subtitle": "Element #2 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
                     }],
                 }]
             }
@@ -119,11 +113,10 @@ function sendGenericMessage(sender) {
         if (error) {
             console.log('Error sending messages: ', error)
         } else if (response.body.error) {
-            console.log('Error2: ', response.body.error)
+            console.log('Error: ', response.body.error)
         }
     })
 }
-
 // Spin up the server
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
