@@ -142,7 +142,7 @@ app.post('/webhook/', function (req, res) {
          var response;
          ibc.chain_stats(function(e, stats){
                          //res.send(stats)
-                         sendTextMessage(sender, JSON.stringify(stats).height , token)
+                         sendTextMessage(sender, 'Block Height: '+stats.height , token)
                          });
          
          } else {
