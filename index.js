@@ -71,7 +71,7 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
 })
-
+/*
 app.get('/chainstats/', function (req, res) {
         
         if(cc_deployed == true){
@@ -87,6 +87,7 @@ app.get('/chainstats/', function (req, res) {
         }
         
 })
+ */
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
@@ -107,6 +108,22 @@ app.post('/webhook/', function (req, res) {
                 sendGenericMessage(sender)
                 continue
             }
+    if (text === 'Chainstats') {
+         if(cc_deployed == true){
+         var response;
+         ibc.chain_stats(function(e, stats){
+                         //res.send(stats)
+                         let text = JSON.stringify(event.postback)
+                         sendTextMessage(sender, text.substring(0, 200), token)
+                         });
+         
+         } else {
+         let text = 'Chaincode not deployed.'
+         sendTextMessage(sender, text.substring(0, 200), token)
+         }
+         continue
+         }
+         
          
             sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
         }
@@ -150,7 +167,7 @@ function sendGenericMessage(sender) {
                     "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://guarded-atoll-99296.herokuapp.com/chainstats/",
+                        "url": "https://www.messenger.com",
                         "title": "web url"
                     }, {
                         "type": "postback",
