@@ -142,13 +142,13 @@ app.post('/webhook/', function (req, res) {
          var response;
          ibc.chain_stats(function(e, stats){
                          //res.send(stats)
-                         sendTextMessage(sender, 'Block height: '+stats.height + '\n' + 'Current block hash: ' + stats.currentBlockHash + '\nPrevious block hash: ' + stats.previousBlockHash  , token)
+                         sendTextMessage(sender, 'Block height: '+stats.height + '\n' + 'Current block hash: ' stats.currentBlockHash + '\nPrevious block hash: ' + stats.previousBlockHash  , token)
                          });
          
          } else {
          //let text = 'Chaincode not deployed.'
          sendTextMessage(sender, 'Chaincode not deployed.', token)
-         }
+         }+
          continue
          }
          
@@ -167,7 +167,7 @@ app.post('/webhook/', function (req, res) {
          }
          
          
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+            sendTextMessage(sender, text.substring(0, 200))
         }
          if (event.postback) {
          //let text = JSON.stringify(event.postback)
