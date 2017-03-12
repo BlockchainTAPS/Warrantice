@@ -77,7 +77,9 @@ app.get('/chainstats/', function (req, res) {
         if(cc_deployed == true){
         var response;
         ibc.chain_stats(function(e, stats){
-            res.send(stats)
+            //res.send(stats)
+                        let text = JSON.stringify(event.postback)
+                        sendTextMessage(sender, text.substring(0, 200), token)
                     });
         
         } else {
