@@ -89,6 +89,35 @@ app.get('/chainstats/', function (req, res) {
 })
  */
 
+
+function cb_got_index(e, index){
+    if(e != null) console.log('[ws error] did not get marble index:', e);
+    else{
+        try{
+            var json = JSON.parse(index);
+            var keys = Object.keys(json);
+            var concurrency = 1;
+            
+            //serialized version
+            async.eachLimit(keys, concurrency, function(key, cb) {
+                            console.log('!', json[key]);
+                            chaincode.query.read([json[key]], function(e, marble) {
+                                                 if(e != null) console.log('[ws error] did not get marble:', e);
+                                                 else {
+                                                 if(marble) sendTextMessage(sender, JSON.parse(marble), token);
+                                                 cb(null);
+                                                 }
+                                                 });
+                            }, function() {
+                            sendTextMessage(sender, 'Finished', token);
+                            });
+        }
+        catch(e){
+            console.log('[ws error] could not parse response', e);
+        }
+    }
+}
+
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
@@ -120,6 +149,20 @@ app.post('/webhook/', function (req, res) {
          //let text = 'Chaincode not deployed.'
          sendTextMessage(sender, 'Chaincode not deployed.', token)
          }
+         continue
+         }
+         
+         if (text === 'Marbles') {
+         if(cc_deployed == true){
+         
+         chaincode.query.read(['_marbleindex'], cb_got_index);
+         
+         } else {
+         //let text = 'Chaincode not deployed.'
+         sendTextMessage(sender, 'Chaincode not deployed.', token)
+         }
+
+         
          continue
          }
          
