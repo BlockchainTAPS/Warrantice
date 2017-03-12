@@ -114,12 +114,12 @@ app.post('/webhook/', function (req, res) {
          ibc.chain_stats(function(e, stats){
                          //res.send(stats)
                          let text = JSON.stringify(event.postback)
-                         sendTextMessage(sender, text.substring(0, 200), token)
+                         sendTextMessage(sender, text, token)
                          });
          
          } else {
          let text = 'Chaincode not deployed.'
-         sendTextMessage(sender, text.substring(0, 200), token)
+         sendTextMessage(sender, text, token)
          }
          continue
          }
