@@ -107,11 +107,12 @@ app.post('/webhook/', function (req, res) {
                 sendGenericMessage(sender)
                 continue
             }
+         
             sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
         }
          if (event.postback) {
-         let text = JSON.stringify(event.postback)
-         sendTextMessage(sender, text.substring(0, 200), token)
+         //let text = JSON.stringify(event.postback)
+         //sendTextMessage(sender, text.substring(0, 200), token)
          continue
          }
     }
@@ -149,7 +150,7 @@ function sendGenericMessage(sender) {
                     "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.messenger.com",
+                        "url": "https://guarded-atoll-99296.herokuapp.com/chainstats/",
                         "title": "web url"
                     }, {
                         "type": "postback",
