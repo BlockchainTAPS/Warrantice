@@ -113,7 +113,7 @@ app.post('/webhook/', function (req, res) {
          var response;
          ibc.chain_stats(function(e, stats){
                          //res.send(stats)
-                         //let text = JSON.stringify(event.postback)
+                         console.log(JSON.stringify(event.postback))
                          sendTextMessage(sender, JSON.stringify(event.postback), token)
                          });
          
