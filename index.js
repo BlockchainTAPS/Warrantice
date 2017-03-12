@@ -77,9 +77,9 @@ app.get('/chainstats/', function (req, res) {
         if(cc_deployed == true){
         var response;
         ibc.chain_stats(function(e, stats){
-            response = JSON.parse(stats)
+            res.send(stats)
                     });
-        res.send(response)
+        
         } else {
         res.send('Chaincode not deployed.')
         }
