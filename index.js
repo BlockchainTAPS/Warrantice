@@ -31,8 +31,8 @@ timeout: 60000
 },
 chaincode:{
 zip_url: 'https://github.com/IBM-Blockchain/marbles/archive/master.zip',
-unzip_dir: 'marbles-master/chaincode',
-git_url: 'https://github.com/IBM-Blockchain/marbles'
+unzip_dir: 'warrantice/chaincode',
+git_url: 'https://git.heroku.com/warrantice.git'
 }
 };
 
