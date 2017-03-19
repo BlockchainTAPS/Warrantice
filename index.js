@@ -104,12 +104,12 @@ function cb_got_index(e, index){
                             chaincode.query.read([json[key]], function(e, marble) {
                                                  if(e != null) console.log('[ws error] did not get marble:', e);
                                                  else {
-                                                 if(marble) sendTextMessage(sender, JSON.parse(marble), token);
+                                                 if(marble) console.log('Marbles: ', JSON.stringify({msg: 'marbles', e: e, marble: JSON.parse(marble)}));
                                                  cb(null);
                                                  }
                                                  });
                             }, function() {
-                            sendTextMessage(sender, 'Finished', token);
+                            console.log(JSON.stringify({msg: 'action', e: e, status: 'finished'});
                             });
         }
         catch(e){
@@ -144,6 +144,17 @@ app.post('/webhook/', function (req, res) {
                          //res.send(stats)
                          sendTextMessage(sender, 'Block height: '+stats.height + '\n' + 'Current block hash: '+ stats.currentBlockHash + '\nPrevious block hash: ' + stats.previousBlockHash  , token)
                          });
+         
+         } else {
+         //let text = 'Chaincode not deployed.'
+         sendTextMessage(sender, 'Chaincode not deployed.', token)
+         }
+         continue
+         }
+    if (text === 'All Marbles') {
+         if(cc_deployed == true){
+        var response;
+         chaincode.query.read(['_marbleindex'], cb_got_index);
          
          } else {
          //let text = 'Chaincode not deployed.'
