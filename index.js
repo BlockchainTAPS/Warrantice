@@ -109,7 +109,7 @@ function cb_got_index(e, index){
                                                  }
                                                  });
                             }, function() {
-                            console.log(JSON.stringify({msg: 'action', e: e, status: 'finished'});
+                            console.log(JSON.stringify({msg: 'action', e: e, status: 'finished'}));
                             });
         }
         catch(e){
