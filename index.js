@@ -56,7 +56,7 @@ function cb_ready(err, cc){                             //response has chaincode
 function cb_deployed(err){
     console.log('sdk has deployed code and waited');
     cc_deployed = true;
-    chaincode.query.read(['a']);
+    chaincode.query.read(['Warrantice1']);
 }
 
 app.set('port', (process.env.PORT || 5000))
@@ -153,7 +153,7 @@ app.post('/webhook/', function (req, res) {
          }
     if (text === 'All Marbles') {
          if(cc_deployed == true){
-        var response;
+         var response;
          chaincode.query.read(['_marbleindex'], cb_got_index);
          
          } else {
